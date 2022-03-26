@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% block title %}
+    <h1>{{ publication.title }}</h1>
+    {% endblock %}
+    <medium>By: {{publication.author.first_name}} {{publication.author.last_name}}</medium> <br>
+    <hr>
+    {% block content %}
+        <p> {{ publication.summary }} </p>
+    {% endblock %}
+    <br> <br>
+    <a href="{% url 'home' %}">Go Back</a>
+</body>
+</html>
