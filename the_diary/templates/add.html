@@ -11,11 +11,14 @@
 {% block content %}
     <h1> Add Publication</h1>
     <br>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-primary"> Publish </button>
-    </form>
+    <div class="mb-3">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_table }}
+            <button class="btn btn-primary"> Publish </button>
+        </form>
+    </div>
+
 
 {% endblock %}
 </body>
