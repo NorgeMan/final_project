@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.urls import reverse
 
 
 class Publication(models.Model):
@@ -14,3 +15,6 @@ class Publication(models.Model):
 
     def __str__(self):
         return self.title + ' | ' + str(self.author)
+
+    def get_absolute_url(self):
+        return reverse('publication-detail', args=(str(self.id)))

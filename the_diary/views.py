@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from .models import Publication
 
 
@@ -14,3 +14,9 @@ class Home(ListView):
 class PublicationDetailedView(DetailView):
     model = Publication
     template_name = 'details.html'
+
+
+class AddPublicationView(CreateView):
+    model = Publication
+    template_name = 'add.html'
+    fields = '__all__'

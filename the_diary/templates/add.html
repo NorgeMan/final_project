@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    Add Publication
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+    <h1> Add Publication</h1>
+    <br>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary"> Publish </button>
+    </form>
+
+{% endblock %}
+</body>
+</html>
