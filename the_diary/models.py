@@ -5,6 +5,7 @@ from datetime import datetime
 
 class Publication(models.Model):
     title = models.CharField(max_length=255)
+    title_tag = models.CharField(max_length=255, default="training")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     start_time = models.DateTimeField(default=datetime.now, blank=False)
     end_time = models.DateTimeField(default=datetime.now, blank=False)

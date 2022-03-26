@@ -1,19 +1,19 @@
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    {% block title %} {{publication.author.first_name}} {{publication.title_tag}} {{publication.end_time}}
+    {% endblock %}
 </head>
 <body>
-    {% block title %}
+{% block content %}
     <h1>{{ publication.title }}</h1>
-    {% endblock %}
     <medium>By: {{publication.author.first_name}} {{publication.author.last_name}}</medium> <br>
     <hr>
-    {% block content %}
         <p> {{ publication.summary }} </p>
-    {% endblock %}
-    <br> <br>
-    <a href="{% url 'home' %}">Go Back</a>
+        <br> <br>
+        <a href="{% url 'home' %}" class="btn btn-primary">Go Back</a>
+{% endblock %}
 </body>
 </html>
