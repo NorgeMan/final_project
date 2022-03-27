@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .models import Publication
-from .forms import PublicationForm
+from .forms import PublicationForm, EditForm
 
 # def home(request):
 #    return render(request, 'home.html', {})
@@ -21,3 +21,9 @@ class AddPublicationView(CreateView):
     model = Publication
     form_class = PublicationForm
     template_name = 'add.html'
+
+
+class UpdatePublicationView(UpdateView):
+    model = Publication
+    form_class = EditForm
+    template_name = 'update.html'
