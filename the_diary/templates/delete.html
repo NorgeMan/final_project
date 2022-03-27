@@ -10,16 +10,20 @@
 <body>
 {% block content %}
 {% if user.is_authenticated %}
-    <h1> Delete Publication</h1>
-    <br>
-    <h3>Delete: {{publication.title}}</h3>
-    <div class="mb-3">
-        <form method="POST">
-            {% csrf_token %}
-            <strong> Are you sure?</strong> <br>
-            <button class="btn btn-primary"> Delete </button>
-        </form>
-    </div>
+    {% if user.id == publication.author.id %}
+        <h1> Delete Publication</h1>
+        <br>
+        <h3>Delete: {{publication.title}}</h3>
+        <div class="mb-3">
+            <form method="POST">
+                {% csrf_token %}
+                <strong> Are you sure?</strong> <br>
+                <button class="btn btn-primary"> Delete </button>
+            </form>
+        </div>
+    {% else %}
+        <strong> Not allowed!!!!!!</strong>
+    {% endif %}
 {% else %}
     <strong> Not allowed!!!!!!</strong>
 {% endif %}

@@ -10,15 +10,19 @@
 <body>
 {% block content %}
 {% if user.is_authenticated %}
-    <h1> Update Publication</h1>
-    <br>
-    <div class="mb-3">
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_table }}
-            <button class="btn btn-primary"> Update </button>
-        </form>
-    </div>
+    {% if user.id == publication.author.id %}
+        <h1> Update Publication</h1>
+        <br>
+        <div class="mb-3">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_table }}
+                <button class="btn btn-primary"> Update </button>
+            </form>
+        </div>
+    {% else %}
+        <strong> Not allowed!!!!!!</strong>
+    {% endif %}
 {% else %}
     <strong> Not allowed!!!!!!</strong>
 {% endif %}
