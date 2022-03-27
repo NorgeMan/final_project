@@ -46,6 +46,6 @@ class AddCategoryView(CreateView):
 
 
 def category_view(request, categories):
-    category_publications = Publication.objects.filter(category=categories)
+    category_publications = Publication.objects.filter(category=categories.replace('-', ' '))
     return render(request, 'categories.html',
-                  {'categories': categories.title(), 'category_publications': category_publications})
+                  {'categories': categories.title().replace('-', ' '), 'category_publications': category_publications})
