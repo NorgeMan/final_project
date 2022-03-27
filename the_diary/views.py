@@ -4,6 +4,7 @@ from .models import Publication, Category
 from .forms import PublicationForm, EditForm
 from django.urls import reverse_lazy
 
+
 # def home(request):
 #    return render(request, 'home.html', {})
 
@@ -40,5 +41,11 @@ class DeletePublicationView(DeleteView):
 
 class AddCategoryView(CreateView):
     model = Category
-    template_name = 'category.html'
+    template_name = 'add_category.html'
     fields = '__all__'
+
+
+def category_view(request, categories):
+    category_publications = Publication.objects.filter(category=categories)
+    return render(request, 'categories.html',
+                  {'categories': categories.title(), 'category_publications': category_publications})
