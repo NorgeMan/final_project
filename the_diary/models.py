@@ -17,5 +17,5 @@ class Publication(models.Model):
         return self.title + ' | ' + str(self.author)
 
     def get_absolute_url(self):
-        return reverse('publication-detail', args=(str(self.id)))
-        # return reverse('home')
+        #return reverse('publication-detail', args=(str(self.id)))
+        return reverse('home')

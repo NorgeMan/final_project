@@ -16,6 +16,7 @@
     <li> <a href="{% url 'publication-detail' publication.pk %}">{{ publication.title }}</a> -
         {{ publication.author.first_name }}
         {{ publication.author.last_name }}  <a href="{% url 'publication-update' publication.pk %}">Edit</a>
+        <a href="{% url 'publication-delete' publication.pk %}">Delete</a>
         <p> START TIME: {{ publication.start_time }}</p>
         <p> END TIME: {{ publication.end_time }}</p>
         <p> NOTES: {{ publication.summary }} </p>

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    Delete Publication
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+    <h1> Delete Publication</h1>
+    <br>
+    <h3>Delete: {{publication.title}}</h3>
+    <div class="mb-3">
+        <form method="POST">
+            {% csrf_token %}
+            <strong> Are you sure?</strong> <br>
+            <button class="btn btn-primary"> Delete </button>
+        </form>
+    </div>
+
+
+{% endblock %}
+</body>
+</html>

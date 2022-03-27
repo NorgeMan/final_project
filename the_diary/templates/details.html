@@ -9,7 +9,9 @@
 <body>
 {% block content %}
     <h1>{{ publication.title }}</h1>
-    By: {{publication.author.first_name}} {{publication.author.last_name}} <a href="{% url 'publication-update' publication.pk %}">Edit</a>
+    By: {{publication.author.first_name}} {{publication.author.last_name}}
+    <a href="{% url 'publication-update' publication.pk %}">Edit</a>
+    <a href="{% url 'publication-delete' publication.pk %}">Delete</a>
     <br>
     <hr>
         <p> {{ publication.summary }} </p>
