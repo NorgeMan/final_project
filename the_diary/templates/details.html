@@ -10,11 +10,13 @@
 {% block content %}
     <h1>{{ publication.title }}</h1>
     By: {{publication.author.first_name}} {{publication.author.last_name}} - {{publication.publication_date}}
-    <a href="{% url 'publication-update' publication.pk %}">Edit</a>
-    <a href="{% url 'publication-delete' publication.pk %}">Delete</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'publication-update' publication.pk %}">Edit</a>
+        <a href="{% url 'publication-delete' publication.pk %}">Delete</a>
+    {% endif %}
     <br>
     <hr>
-        <p> {{ publication.summary }} </p>
+        <p> {{ publication.summary|safe }} </p>
         <br> <br>
         <a href="{% url 'home' %}" class="btn btn-primary">Go Back</a>
 {% endblock %}

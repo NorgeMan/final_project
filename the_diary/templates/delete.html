@@ -9,6 +9,7 @@
 </head>
 <body>
 {% block content %}
+{% if user.is_authenticated %}
     <h1> Delete Publication</h1>
     <br>
     <h3>Delete: {{publication.title}}</h3>
@@ -19,8 +20,9 @@
             <button class="btn btn-primary"> Delete </button>
         </form>
     </div>
-
-
+{% else %}
+    <strong> Not allowed!!!!!!</strong>
+{% endif %}
 {% endblock %}
 </body>
 </html>

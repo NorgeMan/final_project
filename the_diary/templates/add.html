@@ -9,6 +9,7 @@
 </head>
 <body>
 {% block content %}
+{% if user.is_authenticated %}
     <h1> Add Publication</h1>
     <br>
     <div class="mb-3">
@@ -18,8 +19,9 @@
             <button class="btn btn-primary"> Publish </button>
         </form>
     </div>
-
-
+{% else %}
+    <strong> Not allowed!!!!!!</strong>
+{% endif %}
 {% endblock %}
 </body>
 </html>

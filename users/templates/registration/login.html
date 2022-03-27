@@ -4,24 +4,22 @@
 <head>
     <meta charset="UTF-8">
     {% block title %}
-    Edit Publication
+    Login
     {% endblock %}
 </head>
 <body>
 {% block content %}
-{% if user.is_authenticated %}
-    <h1> Update Publication</h1>
+    <h1> Login In</h1>
     <br>
     <div class="mb-3">
         <form method="POST">
             {% csrf_token %}
-            {{ form.as_table }}
-            <button class="btn btn-primary"> Update </button>
+            {{ form.as_p }}
+            <button class="btn btn-primary"> Login </button>
         </form>
     </div>
-{% else %}
-    <strong> Not allowed!!!!!!</strong>
-{% endif %}
+
+
 {% endblock %}
 </body>
 </html>
