@@ -8,20 +8,40 @@
 </head>
 <body>
 {% block content %}
-    <h1>{{ publication.title }} - {{publication.author.id}}</h1>
-    By: {{publication.author.first_name}} {{publication.author.last_name}} - {{publication.publication_date}}
-    <p>Category: {{publication.category}} </p>
+<h1>{{ publication.title }} - {{publication.author.id}}</h1>
+By: {{publication.author.first_name}} {{publication.author.last_name}} - {{publication.publication_date}}
+<p>Category: {{publication.category}} </p>
+{% if user.is_authenticated %}
+{% if user.id == publication.author.id %}
+<a href="{% url 'publication-update' publication.pk %}">Edit</a>
+<a href="{% url 'publication-delete' publication.pk %}">Delete</a>
+{% endif %}
+{% endif %}
+<br>
+<hr>
+<p> {{ publication.summary|safe }} </p>
+<br> <br>
+<a href="{% url 'home' %}" class="btn btn-primary">Go Back</a>
+<br><br>
+<hr>
+<br>
+<form action="{% url 'like_publication' publication.pk %}" method="POST">
+    {% csrf_token %}
     {% if user.is_authenticated %}
-        {% if user.id == publication.author.id %}
-            <a href="{% url 'publication-update' publication.pk %}">Edit</a>
-            <a href="{% url 'publication-delete' publication.pk %}">Delete</a>
+        {% if liked %}
+            <button
+                type="submit" , name="publication_id" , value="{{ publication.id }}" , class="btn btn-danger">Unlike
+            </button>
+        {% else %}
+            <button
+                type="submit" , name="publication_id" , value="{{ publication.id }}" , class="btn btn-primary">Like
+            </button>
         {% endif %}
+        {{ count_likes }} Likes
+    {% else %}
+    <a class="nav-link" href="{% url 'login' %}">Log In to like</a>
     {% endif %}
-    <br>
-    <hr>
-        <p> {{ publication.summary|safe }} </p>
-        <br> <br>
-        <a href="{% url 'home' %}" class="btn btn-primary">Go Back</a>
+</form>
 {% endblock %}
 </body>
 </html>

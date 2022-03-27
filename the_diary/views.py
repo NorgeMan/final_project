@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Publication, Category
 from .forms import PublicationForm, EditForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 
 
 class Home(ListView):
@@ -26,7 +27,17 @@ class PublicationDetailedView(DetailView):
     def get_context_data(self, *args, **kwargs):
         category_menu = Category.objects.all()
         context = super(PublicationDetailedView, self).get_context_data(*args, **kwargs)
+
+        stuff = get_object_or_404(Publication, id=self.kwargs['pk'])
+        count_likes = stuff.count_likes()
+
+        liked = False
+        if stuff.likes.filter(id=self.request.user.id).exists():
+            liked = True
+
         context["category_menu"] = category_menu
+        context["count_likes"] = count_likes
+        context["liked"] = liked
         return context
 
 
@@ -63,3 +74,17 @@ def category_view(request, categories):
 def category_list_view(request):
     category_menu_list = Category.objects.all()
     return render(request, 'categories_list.html', {'category_menu_list': category_menu_list})
+
+
+def like_view(request, pk):
+    publication = get_object_or_404(Publication, id=request.POST.get('publication_id'))
+    liked = False
+    if publication.likes.filter(id=request.user.id).exists():
+        publication.likes.remove(request.user)
+        liked = False
+    else:
+        publication.likes.add(request.user)
+        liked = True
+
+    return HttpResponseRedirect(reverse('publication-detail', args=[str(pk)]))
+
