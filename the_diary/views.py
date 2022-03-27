@@ -11,7 +11,8 @@ from django.urls import reverse_lazy
 class Home(ListView):
     model = Publication
     template_name = 'home.html'
-    ordering = ['-id']
+    ordering = ['-publication_date', '-id']
+    # ordering = ['-id']
 
 
 class PublicationDetailedView(DetailView):
