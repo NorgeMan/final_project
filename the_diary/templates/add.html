@@ -10,17 +10,23 @@
 <body>
 {% block content %}
 {% if user.is_authenticated %}
-    <h1> Add Publication</h1>
-    <br>
-    <div class="mb-3">
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_table }}
-            <button class="btn btn-primary"> Publish </button>
-        </form>
-    </div>
+<h1> Add Publication</h1>
+<br>
+<div class="mb-3">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_table }}
+        <button class="btn btn-primary"> Publish</button>
+    </form>
+</div>
+
+<script>
+    var name = "{{user.id}}";
+    document.getElementById("elder").value = name;
+
+</script>
 {% else %}
-    <strong> Not allowed!!!!!!</strong>
+<strong> Not allowed!!!!!!</strong>
 {% endif %}
 {% endblock %}
 </body>

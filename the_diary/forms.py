@@ -17,7 +17,8 @@ class PublicationForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'category': forms.Select(choices=choice_list, attrs={'class': 'form-control'}),
-            'author': forms.Select(attrs={'class': 'form-control'}),
+            # 'author': forms.Select(attrs={'class': 'form-control'}),
+            'author': forms.TextInput(attrs={'class': 'form-control', 'value': '', 'id': 'elder', 'readonly': 'True'}),
             'start_time': forms.DateTimeInput(attrs={'class': 'form-control'}),
             'end_time': forms.DateTimeInput(attrs={'class': 'form-control'}),
             'summary': forms.Textarea(attrs={'class': 'form-control'}),
