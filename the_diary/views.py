@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Publication
+from .models import Publication, Category
 from .forms import PublicationForm, EditForm
 from django.urls import reverse_lazy
 
@@ -36,3 +36,9 @@ class DeletePublicationView(DeleteView):
     model = Publication
     template_name = 'delete.html'
     success_url = reverse_lazy('home')
+
+
+class AddCategoryView(CreateView):
+    model = Category
+    template_name = 'category.html'
+    fields = '__all__'
