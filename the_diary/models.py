@@ -28,6 +28,7 @@ class Publication(models.Model):
     summary = RichTextField(blank=True, null=True)
     publication_date = models.DateField(default=datetime.now, blank=False)
     likes = models.ManyToManyField(User, related_name='diary_publication')
+    add_image = models.ImageField(null=True, blank=True, upload_to="images/")
 
     def __str__(self):
         return self.title + ' | ' + str(self.author)

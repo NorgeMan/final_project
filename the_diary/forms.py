@@ -12,7 +12,7 @@ for item in choices:
 class PublicationForm(forms.ModelForm):
     class Meta:
         model = Publication
-        fields = ('title', 'category', 'author', 'start_time', 'end_time', 'summary', 'publication_date')
+        fields = ('title', 'category', 'author', 'start_time', 'end_time', 'summary', 'publication_date', 'add_image')
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),

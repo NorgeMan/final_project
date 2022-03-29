@@ -13,7 +13,7 @@
 <h1> Add Publication</h1>
 <br>
 <div class="mb-3">
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.media }}
         {{ form.as_p }}

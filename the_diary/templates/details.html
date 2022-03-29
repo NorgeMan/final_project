@@ -19,6 +19,9 @@ By: {{publication.author.first_name}} {{publication.author.last_name}} - {{publi
 {% endif %}
 <br>
 <hr>
+{% if publication.add_image %}
+    <img src="{{ publication.add_image.url }}" width="800" height="600">
+{% endif %}
 <p> {{ publication.summary|safe }} </p>
 <br> <br>
 <a href="{% url 'home' %}" class="btn btn-primary">Go Back</a>
