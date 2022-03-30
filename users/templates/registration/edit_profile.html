@@ -9,17 +9,47 @@
 </head>
 <body>
 {% block content %}
-    <h1> Edit Profile</h1>
-    <br>
-    <div class="mb-3">
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn btn-primary"> Save and Update </button>
-        </form>
-    </div>
-
-
+<h1> Edit Profile</h1>
+<br>
+<div class="mb-3">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-2">
+                    {% if user.profile.profile_img %}
+                        <img src="{{ user.profile.profile_img.url }}" class="rounded" width="200" height="200">
+                    {% endif %}
+                </div>
+                <div class="col-md-10">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+                        <p class="card-text">{{ user.userprofile.bio }}</p>
+                        <p class="card-text">
+                            {% if user.userprofile.vk_url %}
+                                <a href="{{ user.userprofile.vk_url }}">VK</a>
+                            {% endif %}
+                            {% if user.userprofile.facebook_url %}
+                                <a href="{{ user.userprofile.facebook_url }}">Facebook</a>
+                            {% endif %}
+                            {% if user.userprofile.linked_in_url %}
+                                <a href="{{ user.userprofile.linked_in_url }}">Linked In</a>
+                            {% endif %}
+                            {% if user.userprofile.telegram_url %}
+                                <a href="{{ user.userprofile.telegram_url }}">Telegram</a>
+                            {% endif %}
+                            {% if user.userprofile.instagram_url %}
+                                <a href="{{ user.userprofile.instagram_url }}">Instagram</a>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary"> Save and Update</button>
+    </form>
+</div>
 {% endblock %}
 </body>
 </html>

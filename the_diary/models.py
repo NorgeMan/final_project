@@ -4,6 +4,7 @@ from datetime import datetime
 from django.urls import reverse
 from ckeditor.fields import RichTextField
 
+
 class Category(models.Model):
     class Meta:
         verbose_name_plural = "Categories"
@@ -39,3 +40,18 @@ class Publication(models.Model):
 
     def count_likes(self):
         return self.likes.count()
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    bio = models.TextField()
+    profile_img = models.ImageField(null=True, blank=True, upload_to="images/profiles/",
+                                    default="images/profile.png")
+    vk_url = models.CharField(max_length=255, null=True, blank=True)
+    facebook_url = models.CharField(max_length=255, null=True, blank=True)
+    linked_in_url = models.CharField(max_length=255, null=True, blank=True)
+    telegram_url = models.CharField(max_length=255, null=True, blank=True)
+    instagram_url = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.user)
