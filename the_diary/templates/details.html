@@ -62,6 +62,7 @@ By: {{publication.author.first_name}} {{publication.author.last_name}} - {{publi
                 <h5 class="card-title">{{publication.author.first_name}} {{publication.author.last_name}}</h5>
                 <p class="card-text">{{ publication.author.profile.bio }}</p>
                 <p class="small">
+                    <a href="{% url 'show_profile_page' publication.author.profile.id %}">Profile Page</a>
                     {% if publication.author.profile.vk_url %}
                         <a href="{{ publication.author.profile.vk_url }}">VK</a>
                     {% endif %}

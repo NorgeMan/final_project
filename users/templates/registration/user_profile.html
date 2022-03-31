@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    User Profile
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+    <h1> User Profile</h1>
+    <br>
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-2">
+            {% if page_user.profile_pic %}
+                <img src="{{ page_user.profile_pic.url }}" width="200" height="200" class="card-img">
+            {% else %}
+                <img src="{% static 'the_diary/images/profile.png' %}" width="200" height="200" class="card-img">
+            {% endif %}
+        </div>
+        <div class="col-md-10">
+            <div class="card-body">
+                <h5 class="card-title">{{page_user.user.first_name}} {{page_user.use.last_name}}</h5>
+                <p class="card-text">{{ page_user.user.profile.bio }}</p>
+                <p class="small">
+                    {% if page_user.vk_url %}
+                        <a href="{{ page_user.vk_url }}">VK</a>
+                    {% endif %}
+                    {% if page_user.facebook_url %}
+                        <a href="{{ page_user.facebook_url }}">Facebook</a>
+                    {% endif %}
+                    {% if page_user.linked_in_url %}
+                        <a href="{{ page_user.linked_in_url }}">Linked In</a>
+                    {% endif %}
+                    {% if page_user.telegram_url %}
+                        <a href="{{ page_user.telegram_url }}">Telegram</a>
+                    {% endif %}
+                    {% if page_user.instagram_url %}
+                        <a href="{{ page_user.instagram_url }}">Instagram</a>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>
