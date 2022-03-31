@@ -17,12 +17,7 @@
         {{ form.as_p }}
         <div class="card mb-3">
             <div class="row g-0">
-                <div class="col-md-2">
-                    {% if user.profile.profile_img %}
-                        <img src="{{ user.profile.profile_img.url }}" class="rounded" width="200" height="200">
-                    {% endif %}
-                </div>
-                <div class="col-md-10">
+                <div class="col-md-12">
                     <div class="card-body">
                         <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
                         <p class="card-text">{{ user.userprofile.bio }}</p>

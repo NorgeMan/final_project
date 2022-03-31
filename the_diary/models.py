@@ -45,8 +45,7 @@ class Publication(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField()
-    profile_img = models.ImageField(null=True, blank=True, upload_to="images/profiles/",
-                                    default="images/profile.png")
+
     vk_url = models.CharField(max_length=255, null=True, blank=True)
     facebook_url = models.CharField(max_length=255, null=True, blank=True)
     linked_in_url = models.CharField(max_length=255, null=True, blank=True)
