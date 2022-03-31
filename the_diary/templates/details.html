@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +21,7 @@ By: {{publication.author.first_name}} {{publication.author.last_name}} - {{publi
 <br>
 <hr>
 {% if publication.add_image %}
-    <img src="{{ publication.add_image.url }}" width="800" height="600">
+<img src="{{ publication.add_image.url }}" width="800" height="600">
 {% endif %}
 <p> {{ publication.summary|safe }} </p>
 <br> <br>
@@ -31,20 +32,57 @@ By: {{publication.author.first_name}} {{publication.author.last_name}} - {{publi
 <form action="{% url 'like_publication' publication.pk %}" method="POST">
     {% csrf_token %}
     {% if user.is_authenticated %}
-        {% if liked %}
-            <button
-                type="submit" , name="publication_id" , value="{{ publication.id }}" , class="btn btn-danger">Unlike
-            </button>
-        {% else %}
-            <button
-                type="submit" , name="publication_id" , value="{{ publication.id }}" , class="btn btn-primary">Like
-            </button>
-        {% endif %}
-        {{ count_likes }} Likes
+    {% if liked %}
+    <button
+            type="submit" , name="publication_id" , value="{{ publication.id }}" , class="btn btn-danger">Unlike
+    </button>
+    {% else %}
+    <button
+            type="submit" , name="publication_id" , value="{{ publication.id }}" , class="btn btn-primary">Like
+    </button>
+    {% endif %}
+    {{ count_likes }} Likes
     {% else %}
     <a class="nav-link" href="{% url 'login' %}">Log In to like</a>
     {% endif %}
 </form>
+<br>
+{% if user.is_authenticated %}
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-2">
+            {% if publication.author.profile.profile_pic %}
+                <img src="{{ publication.author.profile.profile_pic.url }}" width="200" height="200" class="card-img">
+            {% else %}
+                <img src="{% static 'the_diary/images/profile.png' %}" width="200" height="200" class="card-img">
+            {% endif %}
+        </div>
+        <div class="col-md-10">
+            <div class="card-body">
+                <h5 class="card-title">{{publication.author.first_name}} {{publication.author.last_name}}</h5>
+                <p class="card-text">{{ publication.author.profile.bio }}</p>
+                <p class="small">
+                    {% if publication.author.profile.vk_url %}
+                        <a href="{{ publication.author.profile.vk_url }}">VK</a>
+                    {% endif %}
+                    {% if publication.author.profile.facebook_url %}
+                        <a href="{{ publication.author.profile.facebook_url }}">Facebook</a>
+                    {% endif %}
+                    {% if publication.author.profile.linked_in_url %}
+                        <a href="{{ publication.author.profile.linked_in_url }}">Linked In</a>
+                    {% endif %}
+                    {% if publication.author.profile.telegram_url %}
+                        <a href="{{ publication.author.profile.telegram_url }}">Telegram</a>
+                    {% endif %}
+                    {% if publication.author.profile.instagram_url %}
+                        <a href="{{ publication.author.profile.instagram_url }}">Instagram</a>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock %}
 </body>
 </html>

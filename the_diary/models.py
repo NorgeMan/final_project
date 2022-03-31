@@ -42,9 +42,10 @@ class Publication(models.Model):
         return self.likes.count()
 
 
-class UserProfile(models.Model):
+class Profile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     bio = models.TextField()
+    profile_pic = models.ImageField(null=True, blank=True, upload_to="images/profile/")
 
     vk_url = models.CharField(max_length=255, null=True, blank=True)
     facebook_url = models.CharField(max_length=255, null=True, blank=True)
