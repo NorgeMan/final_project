@@ -4,13 +4,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    {% block title %} {{publication.author.first_name}} {{publication.category}} {{publication.end_time}}
+    {% block title %} {{publication.category}} {{publication.end_time}}
     {% endblock %}
 </head>
 <body>
 {% block content %}
 <h1>{{ publication.title }} - {{publication.author.id}}</h1>
-By: {{publication.author.first_name}} {{publication.author.last_name}} - {{publication.publication_date}}
+{% if user.is_authenticated %}
+By: {{publication.author.first_name}} {{publication.author.last_name}} -
+{% endif %}
+{{publication.publication_date}}
 <p>Category: {{publication.category}} </p>
 {% if user.is_authenticated %}
 {% if user.id == publication.author.id %}
@@ -48,12 +51,14 @@ By: {{publication.author.first_name}} {{publication.author.last_name}} - {{publi
 </form>
 <br>
 <hr>
+{% if user.is_authenticated %}
 <h2>Comments:</h2>
 <br>
 {% if not publication.comments.all %}
     Be the first who comment this publication
-    <a href="#">Add Comment</a>
+    <a href="{% url 'add_comment' publication.pk %}">Add Comment</a>
 {% else %}
+
     {% for comment in publication.comments.all %}
         <strong>{{ comment.name }} - {{ comment.date_added }}</strong>
         <br>
@@ -61,9 +66,12 @@ By: {{publication.author.first_name}} {{publication.author.last_name}} - {{publi
         <br>
         <br>
     {% endfor %}
+
+    <a href="{% url 'add_comment' publication.pk %}">Add Comment</a>
 {% endif %}
 <hr>
 <br>
+{% endif %}
 {% if user.is_authenticated %}
 <div class="card mb-3">
     <div class="row g-0">

@@ -1,6 +1,5 @@
 from django import forms
-from .models import Publication, Category
-
+from .models import Publication, Category, Comment
 
 choices = Category.objects.all().values_list('name', 'name')
 choice_list = []
@@ -37,4 +36,16 @@ class EditForm(forms.ModelForm):
             'start_time': forms.DateTimeInput(attrs={'class': 'form-control'}),
             'end_time': forms.DateTimeInput(attrs={'class': 'form-control'}),
             'summary': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+
+
+class AddCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name', 'body')
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control',
+                                           'placeholder': 'Only your login please or admin will delete your comment'}),
+            'body': forms.Textarea(attrs={'class': 'form-control'}),
         }

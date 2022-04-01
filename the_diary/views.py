@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Publication, Category
-from .forms import PublicationForm, EditForm
+from .models import Publication, Category, Comment
+from .forms import PublicationForm, EditForm, AddCommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 
@@ -88,3 +88,14 @@ def like_view(request, pk):
 
     return HttpResponseRedirect(reverse('publication-detail', args=[str(pk)]))
 
+
+class AddCommentView(CreateView):
+    model = Comment
+    form_class = AddCommentForm
+    template_name = 'add_comment.html'
+
+    def form_valid(self, form):
+        form.instance.publication_id = self.kwargs['pk']
+        return super().form_valid(form)
+
+    success_url = reverse_lazy('home')
