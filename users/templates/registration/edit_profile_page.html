@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    Edit Profile Page
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+{% if user.is_authenticated %}
+{% if user.id == profile.user.id %}
+<h1> Edit Profile Page</h1>
+<br>
+<div class="mb-3">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary"> Save and Update</button>
+    </form>
+</div>
+
+{% else %}
+    You aren't able to edit this page
+{% endif %}
+{% else %}
+<strong> Not allowed!!!!!!</strong>
+{% endif %}
+{% endblock %}
+</body>
+</html>
