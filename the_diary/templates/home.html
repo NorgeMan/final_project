@@ -15,11 +15,11 @@
     <ul>
     {% for publication in object_list %}
     <li> <a href="{% url 'publication-detail' publication.pk %}">{{ publication.title }}</a> -
-        <a href="{% url 'category' publication.category|slugify %}">{{ publication.category }}</a> by
+        <a href="{% url 'category' publication.category|slugify %}">{{ publication.category }}</a>
+        {% if user.is_authenticated %}
+        by
         {{ publication.author.first_name }}
         {{ publication.author.last_name }}
-
-        {% if user.is_authenticated %}
             {% if user.id == publication.author.id %}
                 <a href="{% url 'publication-update' publication.pk %}">Edit</a>
                 <a href="{% url 'publication-delete' publication.pk %}">Delete</a>
