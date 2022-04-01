@@ -47,6 +47,23 @@ By: {{publication.author.first_name}} {{publication.author.last_name}} - {{publi
     {% endif %}
 </form>
 <br>
+<hr>
+<h2>Comments:</h2>
+<br>
+{% if not publication.comments.all %}
+    Be the first who comment this publication
+    <a href="#">Add Comment</a>
+{% else %}
+    {% for comment in publication.comments.all %}
+        <strong>{{ comment.name }} - {{ comment.date_added }}</strong>
+        <br>
+        {{ comment.body }}
+        <br>
+        <br>
+    {% endfor %}
+{% endif %}
+<hr>
+<br>
 {% if user.is_authenticated %}
 <div class="card mb-3">
     <div class="row g-0">
