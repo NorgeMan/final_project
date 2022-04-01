@@ -4,9 +4,9 @@ from django.views import generic
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 
-from .forms import SignUpForm, EditProfileForm, PasswordChangesForm
+from .forms import SignUpForm, EditProfileForm, PasswordChangesForm, ProfilePageForm
 from the_diary.models import Profile
 
 
@@ -55,3 +55,14 @@ class EditProfilePageView(generic.UpdateView):
     fields = ['bio', 'profile_pic', 'vk_url', 'facebook_url', 'linked_in_url', 'telegram_url', 'instagram_url']
 
     success_url = reverse_lazy('home')
+
+
+class CreateProfilePageView(CreateView):
+    model = Profile
+    form_class = ProfilePageForm
+    template_name = 'registration/create_user_profile_page.html'
+    #fields = '__all__'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)

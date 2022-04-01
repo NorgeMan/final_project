@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+    Create a New Profile Page
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+{% if user.is_authenticated %}
+<h1> Create Profile Page </h1>
+<br>
+<div class="mb-3">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary"> Create </button>
+    </form>
+</div>
+
+{% else %}
+<strong> Not allowed!!!!!!</strong>
+{% endif %}
+{% endblock %}
+</body>
+</html>

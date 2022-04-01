@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django import forms
+from the_diary.models import Profile
 
 
 class SignUpForm(UserCreationForm):
@@ -48,3 +49,19 @@ class PasswordChangesForm(PasswordChangeForm):
     class Meta:
         model = User
         fields = ('old_password', 'new_password1', 'new_password2')
+
+
+class ProfilePageForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('bio', 'profile_pic', 'vk_url', 'facebook_url', 'linked_in_url', 'telegram_url', 'instagram_url')
+
+        widgets = {
+            'bio': forms.Textarea(attrs={'class': 'form-control'}),
+            # 'profile_pic': forms.TextInput(attrs={'class': 'form-control'}),
+            'vk_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'facebook_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'linked_in_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'telegram_url': forms.TextInput(attrs={'class': 'form-control'}),
+            'instagram_url': forms.TextInput(attrs={'class': 'form-control'}),
+        }
